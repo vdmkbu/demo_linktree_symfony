@@ -42,7 +42,6 @@ final class UserFactory extends ModelFactory
 
     protected function initialize(): self
     {
-        // see https://github.com/zenstruck/foundry#initialization
         return $this
              ->afterInstantiate(function(User $user) {
                  $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
