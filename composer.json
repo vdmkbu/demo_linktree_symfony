@@ -27,7 +27,8 @@
         "symfony/stopwatch": "^5.2",
         "symfony/twig-bundle": "^5.2",
         "symfony/var-dumper": "^5.2",
-        "symfony/web-profiler-bundle": "^5.2"
+        "symfony/web-profiler-bundle": "^5.2",
+        "zenstruck/foundry": "^1.7"
     },
     "config": {
         "optimize-autoloader": true,
