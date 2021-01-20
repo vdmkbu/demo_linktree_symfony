@@ -5,6 +5,7 @@ namespace App\Controller\API\V1;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -30,6 +31,7 @@ class AccountController extends AbstractController
         $user = $this->getUser();
 
         $json = $this->serializer->serialize($user, 'json', ['groups' => ['main']]);
-        return $this->json($json, 200);
+
+        return new JsonResponse($json, 200,[],true);
     }
 }
