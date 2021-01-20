@@ -1,7 +1,47 @@
 {% extends 'base.html.twig' %}
 
-
+{% block html_class %}
+    h-100
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/cover.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
-    index page content
+    <body class="d-flex h-100 text-center text-white bg-dark">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0">Linktree clone</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="{{ path('index') }}">Home</a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a class="nav-link" href="{{ path('user', {username: app.user.username}) }}">{{ app.user.username }}</a>
+                    {% else %}
+                    <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                    <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3">
+            <h1>The Only Link You’ll Ever Need</h1>
+            <p class="lead">Connect audiences to all of your content with just one link
+            </p>
+            <p class="lead">
+                <a href="{{ path('app_register') }}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Get started for free</a>
+            </p>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+
+        </footer>
+    </div>
+
+
+
+    </body>
 {% endblock %}
