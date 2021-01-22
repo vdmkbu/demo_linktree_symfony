@@ -3,5 +3,28 @@
 {% block title %}{{ user.username }} links{% endblock %}
 
 {% block body %}
-    <h2>{{ user.username }}</h2>
+
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 offset-md-3">
+
+                {% for link in user.links %}
+                    <div class="link">
+                        <a
+                                class="user-link d-block p-4 mb-4 rounded h3 text-center"
+                                style="border: 2px solid;"
+                                href="{{ link.url }}"
+                                target="_blank"
+                                rel="nofollow"
+                                data-link-id="{{ link.id }}"
+                        >{{ link.name }}</a>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
