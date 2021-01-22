@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Linktree clone</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_dashboard') }}/settings">Profile Settings</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user', {username: app.user.username}) }}">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+
+        <div class="container">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-error" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+
+            <h1 class="mt-5">My Links</h1>
+            <a href="{{ path('app_link_new') }}">
+                <button type="button" class="btn btn-primary">Add link</button>
+            </a>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">Visits</th>
+                    <th scope="col">Last Visit</th>
+                    <th scope="col">Tools</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                {% for link in links %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ link.name }}</td>
+                    <td>{{ link.url }}</td>
+                    <td>12</td>
+                    <td>12.01.2021 13:45</td>
+                    <td>
+                        <a href="{{ path('app_link_edit', {link: link.id}) }}">
+                        <button type="button" class="btn btn-warning btn-sm">
+                            Edit
+                        </button>
+                        </a>
+                        <a href="{{ path('app_link_delete', {link: link.id}) }}">
+                            <button type="button" class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                        </a>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+
+
+
+{% endblock %}

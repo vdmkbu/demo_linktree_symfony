@@ -5,6 +5,7 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Link;
 
 class LinkFormType extends AbstractType
 {
@@ -19,7 +20,7 @@ class LinkFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => \App\Form\DTO\Link::class,
+            'data_class' => Link::class,
         ]);
     }
 }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    {{ include('_header.html.twig') }}
+
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">Add Link</h1>
+
+            {{ include('link/_form.html.twig', {
+                button_text: 'Add'
+            }) }}
+
+        </div>
+    </main>
+
+
+
+{% endblock %}
