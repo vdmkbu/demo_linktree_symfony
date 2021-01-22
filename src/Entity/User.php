@@ -55,6 +55,11 @@ class User implements UserInterface
      */
     private $links;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserProfile::class, mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private $userProfile;
+
     public function __construct()
     {
         $this->apiTokens = new ArrayCollection();
@@ -203,6 +208,28 @@ class User implements UserInterface
                 $link->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserProfile(): ?UserProfile
+    {
+        return $this->userProfile;
+    }
+
+    public function setUserProfile(?UserProfile $userProfile): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($userProfile === null && $this->userProfile !== null) {
+            $this->userProfile->setOwner(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($userProfile !== null && $userProfile->getOwner() !== $this) {
+            $userProfile->setOwner($this);
+        }
+
+        $this->userProfile = $userProfile;
 
         return $this;
     }
