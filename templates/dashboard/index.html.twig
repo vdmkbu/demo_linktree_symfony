@@ -13,7 +13,22 @@
     <main role="main" class="flex-shrink-0">
         <div class="container">
             <h1 class="mt-5">Settings</h1>
+            API Token:
+            {% for token in user.ApiTokens %}
+                {% if token.isExpired %}
+                    API token is expired, <a href="{{ path('app_generate_token') }}">generate new</a>
+                {% else %}
+                    <p><code>{{ token.token }}</code>
+                    <small>expires at: {{ token.expiresAt|date('d.m.Y H:i:s') }}</small>
+                    </p>
+                {% endif %}
+                    <br>
 
+
+            {% else%}
+                Not API token yet, <a href="{{ path('app_generate_token') }}">generate</a>
+            {% endfor %}
+            <hr class="my-4">
             {{ form_start(form, {'method':'POST'}) }}
             {{ form_row(form.backgroundColor, {
                 attr: {
