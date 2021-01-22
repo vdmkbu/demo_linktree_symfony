@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LinkRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,16 @@ class Link
      * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Visit::class, mappedBy="link", orphanRemoval=true)
+     */
+    private $visits;
+
+    public function __construct()
+    {
+        $this->visits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +82,36 @@ class Link
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Visit[]
+     */
+    public function getVisits(): Collection
+    {
+        return $this->visits;
+    }
+
+    public function addVisit(Visit $visit): self
+    {
+        if (!$this->visits->contains($visit)) {
+            $this->visits[] = $visit;
+            $visit->setLink($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisit(Visit $visit): self
+    {
+        if ($this->visits->removeElement($visit)) {
+            // set the owning side to null (unless already changed)
+            if ($visit->getLink() === $this) {
+                $visit->setLink(null);
+            }
+        }
 
         return $this;
     }
