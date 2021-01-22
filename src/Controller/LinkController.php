@@ -34,7 +34,7 @@ class LinkController extends AbstractController
     public function index(): Response
     {
         return $this->render('link/index.html.twig', [
-            'links' => $this->linkRepository->findBy([], ['name' => 'ASC'])
+            'links' => $this->linkRepository->findBy(['owner' => $this->getUser()], ['name' => 'ASC'])
         ]);
     }
 
