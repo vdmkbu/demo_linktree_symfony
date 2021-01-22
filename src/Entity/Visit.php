@@ -73,4 +73,9 @@ class Visit
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getCreatedAt()->format('d.m.Y H:i:s');
+    }
 }

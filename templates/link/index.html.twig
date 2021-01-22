@@ -51,7 +51,7 @@
                     <td>{{ link.name }}</td>
                     <td>{{ link.url }}</td>
                     <td>{{ link.visits|length }}</td>
-                    <td>12.01.2021 13:45</td>
+                    <td>{{ link.visits|last }}</td>
                     <td>
                         <a href="{{ path('app_link_edit', {link: link.id}) }}">
                         <button type="button" class="btn btn-warning btn-sm">
