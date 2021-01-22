@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserProfileRepository::class)
@@ -19,11 +20,13 @@ class UserProfile
 
     /**
      * @ORM\Column(type="string", length=7, nullable=true)
+     * @Assert\Length(max="7")
      */
     private $backgroundColor;
 
     /**
      * @ORM\Column(type="string", length=7, nullable=true)
+     * @Assert\Length(max="7")
      */
     private $textColor;
 

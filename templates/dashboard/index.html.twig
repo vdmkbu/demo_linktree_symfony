@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    {{ include('_header.html.twig') }}
+
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">Settings</h1>
+
+            {{ form_start(form, {'method':'POST'}) }}
+            {{ form_row(form.backgroundColor, {
+                attr: {
+                    placeholder: '#ffffff',
+                    class: 'form-control'
+                }
+            }) }}
+            {{ form_row(form.textColor, {
+                attr: {
+                    placeholder: '#000000',
+                    class: 'form-control'
+                }
+            }) }}
+
+            <hr class="my-4">
+            <div class="form-group">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Set</button>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </main>
+
+{% endblock %}
