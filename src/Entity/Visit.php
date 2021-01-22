@@ -76,6 +76,6 @@ class Visit
 
     public function __toString()
     {
-        return (string) $this->getCreatedAt()->format('d.m.Y H:i:s');
+        return (string) $this->getCreatedAt()->format('d.m.Y H:i:s') . " (" . $this->getUserAgent() . ")";
     }
 }
