@@ -66,6 +66,7 @@ class LinkController extends AbstractController
 
     /**
      * @Route("/dashboard/links/{link}/edit", name="app_link_edit")
+     * @IsGranted("MANAGE", subject="link")
      */
     public function edit(Link $link, Request $request)
     {
@@ -88,6 +89,7 @@ class LinkController extends AbstractController
 
     /**
      * @Route("/dashboard/links/{link}/delete", name="app_link_delete")
+     * @IsGranted("MANAGE", subject="link")
      */
     public function delete(Link $link)
     {
