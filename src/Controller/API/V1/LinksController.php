@@ -30,7 +30,7 @@ class LinksController extends AbstractController
      */
     public function links()
     {
-        $links = $this->linkRepository->findBy(['owner' => $this->getUser()]);
+        $links = $this->getUser()->getLinks();
         $json = $this->serializer->serialize($links, 'json',
             [
                 'group' => ['main'],
@@ -49,8 +49,8 @@ class LinksController extends AbstractController
      */
     public function linkVisits(Link $link)
     {
-        $visits = $this->visitRepository->findBy(['link' => $link]);
-        $json = $this->serializer->serialize($visits, 'json', [
+
+        $json = $this->serializer->serialize($link->getVisits(), 'json', [
            'ignored_attributes' => ['link'],
            'circular_reference_handler' => function ($object) {
                 return $object->getId();
