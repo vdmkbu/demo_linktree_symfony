@@ -4,7 +4,9 @@
 namespace App\Controller\API\V1;
 
 
+use App\Entity\Link;
 use App\Repository\LinkRepository;
+use App\Repository\VisitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -14,11 +16,13 @@ class LinksController extends AbstractController
 {
     private SerializerInterface $serializer;
     private LinkRepository $linkRepository;
+    private VisitRepository $visitRepository;
 
-    public function __construct(SerializerInterface $serializer, LinkRepository $linkRepository)
+    public function __construct(SerializerInterface $serializer, LinkRepository $linkRepository, VisitRepository $visitRepository)
     {
         $this->serializer = $serializer;
         $this->linkRepository = $linkRepository;
+        $this->visitRepository = $visitRepository;
     }
 
     /**
@@ -38,5 +42,21 @@ class LinksController extends AbstractController
 
         return new JsonResponse($json, 200, [], true);
 
+    }
+
+    /**
+     * @Route("/api/v1/links/{link}/visits")
+     */
+    public function linkVisits(Link $link)
+    {
+        $visits = $this->visitRepository->findBy(['link' => $link]);
+        $json = $this->serializer->serialize($visits, 'json', [
+           'ignored_attributes' => ['link'],
+           'circular_reference_handler' => function ($object) {
+                return $object->getId();
+           }
+        ]);
+
+        return new JsonResponse($json, 200, [], true);
     }
 }
