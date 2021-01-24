@@ -7,6 +7,8 @@ docker-down:
 docker-build:
 	docker-compose up --build -d
 
+init: composer migrate fixtures
+
 migration:
 	docker-compose exec php-cli bin/console make:migration
 
@@ -15,3 +17,6 @@ migrate:
 
 fixtures:
 	docker-compose exec php-cli bin/console doctrine:fixtures:load -n
+
+composer:
+	docker-compose exec php-cli composer install
