@@ -11,7 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class LinksController extends AbstractController
 {
     private SerializerInterface $serializer;
@@ -46,6 +50,7 @@ class LinksController extends AbstractController
 
     /**
      * @Route("/api/v1/links/{link}/visits")
+     * @IsGranted("MANAGE", subject="link")
      */
     public function linkVisits(Link $link)
     {
