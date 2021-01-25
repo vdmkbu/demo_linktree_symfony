@@ -30,8 +30,6 @@ class UserRegisteredHandler implements MessageHandlerInterface
     {
         $user = $this->userRepository->find($message->getId());
 
-        $this->logger->info('User '.$user->getUsername().' registered');
-
         $this->mailer->send((new NotificationEmail())
                      ->subject('Welcome to the site')
                      ->htmlTemplate('emails/welcome.html.twig')

@@ -27,8 +27,11 @@
         "symfony/proxy-manager-bridge": "5.2.*",
         "symfony/security-bundle": "5.2.*",
         "symfony/serializer": "5.2.*",
+        "symfony/twig-bundle": "5.2.*",
         "symfony/validator": "5.2.*",
-        "symfony/yaml": "5.2.*"
+        "symfony/yaml": "5.2.*",
+        "twig/cssinliner-extra": "^3.2",
+        "twig/inky-extra": "^3.2"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
@@ -36,7 +39,6 @@
         "symfony/maker-bundle": "^1.28",
         "symfony/monolog-bundle": "^3.0",
         "symfony/stopwatch": "^5.2",
-        "symfony/twig-bundle": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2",
         "zenstruck/foundry": "^1.7"

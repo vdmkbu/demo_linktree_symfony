@@ -1,5 +1,3 @@
-{% extends '@email/default/notification/body.html.twig' %}
-{% block content %}
-    <p>You have registered on the Linktree clone</p>
-    <p>Your profile: {{ url('user', {username: user.username}) }}</p>
-{% endblock %}
+<h1>Welcome {{ user.username }}!</h1>
+<p>You have registered on the Linktree clone</p>
+<p>Your profile: {{ url('user', {username: user.username}) }}</p>
