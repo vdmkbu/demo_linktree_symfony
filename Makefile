@@ -20,3 +20,6 @@ fixtures:
 
 composer:
 	docker-compose exec php-cli composer install
+
+get-random-user:
+	docker-compose exec php-cli bin/console app:random-user
