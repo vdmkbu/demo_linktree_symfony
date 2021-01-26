@@ -4,6 +4,9 @@ docker-up:
 docker-down:
 	docker-compose down
 
+docker-clear:
+	docker-compose down -v --remove-orphans
+
 docker-build:
 	docker-compose up --build -d
 
