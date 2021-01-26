@@ -7,7 +7,7 @@ docker-down:
 docker-build:
 	docker-compose up --build -d
 
-init: composer migrate fixtures
+init: docker-build composer migrate fixtures
 
 migration:
 	docker-compose exec php-cli bin/console make:migration
