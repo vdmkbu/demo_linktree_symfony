@@ -4,7 +4,11 @@ RUN apk add --no-cache postgresql-dev bash coreutils \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_pgsql
 
+RUN docker-php-ext-enable pdo_pgsql && docker-php-ext-enable sodium
+
 RUN apk update && apk add unzip
+RUN apk add libxslt-dev
+RUN docker-php-ext-install xsl
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
